@@ -4,7 +4,7 @@ using System.Data.SQLite;
 
 class DatabaseInitializer
 {
-    const string connectionString = "Data Source=C:\\Users\\ANTEY\\Desktop\\ConsoleApp3\\OnlineWalletDB.sqlite;";
+    const string connectionString = "Data Source=OnlineWalletDB.sqlite;";
 
     static void Main()
     {
