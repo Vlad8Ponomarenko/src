@@ -1,0 +1,35 @@
+CREATE TABLE Users (
+    UserID INTEGER PRIMARY KEY,
+    Username TEXT,
+    Email TEXT,
+    Password TEXT
+);
+
+CREATE TABLE Wallets (
+    WalletID INTEGER PRIMARY KEY,
+    UserID INTEGER,
+    Balance DECIMAL(18, 2),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+CREATE TABLE Transactions (
+    TransactionID INTEGER PRIMARY KEY,
+    SenderWalletID INTEGER,
+    ReceiverWalletID INTEGER,
+    Amount DECIMAL(18, 2),
+    Timestamp DATETIME,
+    FOREIGN KEY (SenderWalletID) REFERENCES Wallets(WalletID),
+    FOREIGN KEY (ReceiverWalletID) REFERENCES Wallets(WalletID)
+);
+
+INSERT INTO Users (UserID, Username, Email, Password) VALUES
+(1, 'user1', 'user1@example.com', 'password1'),
+(2, 'user2', 'user2@example.com', 'password2');
+
+INSERT INTO Wallets (WalletID, UserID, Balance) VALUES
+(101, 1, 1000.00),
+(102, 2, 500.00);
+
+INSERT INTO Transactions (TransactionID, SenderWalletID, ReceiverWalletID, Amount, Timestamp) VALUES
+(1001, 101, 102, 200.00, DATETIME('now')),
+(1002, 102, 101, 100.00, DATETIME('now'));
